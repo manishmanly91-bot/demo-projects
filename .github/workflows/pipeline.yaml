@@ -2,7 +2,8 @@ name: CI Pipeline
 
 on:
   push:
-    branches: [ develop ]
+    branches:
+      - develop
 
 jobs:
   build:
@@ -10,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4 # latest stable (v5 doesn’t exist yet)
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -18,4 +19,10 @@ jobs:
           node-version: 21
 
       - name: Install dependencies
-        run: npm Install
+        run: npm install
+
+      - name: Run build
+        run: npm run build 
+
+      - name: Run tests
+        run: npm test 
